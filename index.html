@@ -429,7 +429,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:rgba(
       <h1>O seu esforço não está errado.<br><em>Só está na ordem errada.</em></h1>
       <p class="lead">O Raio-X Estratégico analisa o seu negócio e mostra o que realmente trava o crescimento — separando o sintoma que você sente da causa que ninguém te mostrou. Com o próximo movimento certo, na ordem certa.</p>
       <div class="lp-cta-row">
-        <button class="btn btn-lg lp-btn-light" onclick="go('checkout')">Fazer meu Raio-X →</button>
+        <button class="btn btn-lg lp-btn-light" onclick="irParaPagamento()">Fazer meu Raio-X →</button>
         <span class="micro">Análise completa · entregue na hora</span>
       </div>
       <p class="lp-welcome">Para qualquer empresa — do negócio que está começando ao que já está estruturado. Independente do tamanho ou do momento, o seu negócio cabe aqui.</p>
@@ -492,15 +492,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:rgba(
     <div class="lp-price">
       <div class="tag">Raio-X Estratégico</div>
       <div class="val"><small>R$</small>97</div>
-      <div class="cap">Pagamento único · cartão, Pix ou parcelado · entregue na hora</div>
-      <button class="btn btn-lg" style="width:100%;justify-content:center" onclick="go('checkout')">Fazer meu Raio-X agora →</button>
-      <div class="co-trust"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> Pagamento seguro</div>
+      <div class="cap">Pagamento único · cartão, Pix ou boleto · entregue na hora</div>
+      <button class="btn btn-lg" style="width:100%;justify-content:center" onclick="irParaPagamento()">Fazer meu Raio-X agora →</button>
+      <div class="co-trust"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> Pagamento seguro via Asaas</div>
+      <p style="font-size:12px;color:var(--sub);text-align:center;margin-top:10px;line-height:1.5">🔒 O acesso ao diagnóstico é liberado apenas após confirmação do pagamento pelo Asaas.</p>
     </div>
   </div>
 </div>
 
-<!-- ════════ CHECKOUT (simulação visual + ponto de integração real) ════════ -->
-<div class="view" id="view-checkout">
+<!-- ════════ TELA DE PAGAMENTO / ESPERA (gate Asaas) ════════ -->
+<div class="view" id="view-payment">
   <div class="co-wrap">
     <div class="co-card">
       <div class="co-head">
@@ -508,24 +509,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:rgba(
         <div class="prod">Raio-X Estratégico</div>
         <div class="amt">R$ 97<small> · pagamento único</small></div>
       </div>
-      <div class="co-body">
-        <div class="co-sim">⚑ Simulação de checkout. Em produção, este formulário é substituído pela plataforma de pagamento (ação da Yasmin: credencial bancária + integração).</div>
-        <div class="co-field"><label>Nome completo</label><input id="co-nome" placeholder="Seu nome"></div>
-        <div class="co-field"><label>E-mail</label><input id="co-email" type="email" placeholder="seu@email.com"></div>
-        <div class="co-field"><label>Forma de pagamento</label>
-          <div class="co-pay">
-            <div class="co-pay-opt on" onclick="payOpt(this)">Cartão</div>
-            <div class="co-pay-opt" onclick="payOpt(this)">Pix</div>
-            <div class="co-pay-opt" onclick="payOpt(this)">Parcelado</div>
-          </div>
+      <div class="co-body" style="text-align:center">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--azul-bg);display:flex;align-items:center;justify-content:center;margin:6px auto 20px">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><rect x="4" y="8" width="16" height="12" rx="2" stroke="#0066FF" stroke-width="2"/><path d="M8 8V6a4 4 0 018 0v2" stroke="#0066FF" stroke-width="2"/></svg>
         </div>
-        <div class="co-row">
-          <div class="co-field"><label>Número do cartão</label><input placeholder="0000 0000 0000 0000"></div>
-          <div class="co-field"><label>Validade / CVV</label><input placeholder="MM/AA · 000"></div>
-        </div>
-        <button class="btn btn-lg" style="width:100%;justify-content:center;margin-top:6px" onclick="confirmarPagamento()">Pagar R$ 97 e começar →</button>
-        <div class="co-trust"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> Ambiente seguro · seus dados são protegidos</div>
-        <p class="print-note" style="margin-top:14px"><a onclick="go('landing')" style="color:var(--sub);cursor:pointer">← Voltar</a></p>
+        <h2 style="font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;color:var(--escuro);letter-spacing:-.02em;margin-bottom:12px">Aguardando confirmação do pagamento</h2>
+        <p style="font-size:14.5px;color:var(--sub);line-height:1.7;max-width:400px;margin:0 auto 26px">Assim que o Asaas confirmar o pagamento, o seu acesso ao Raio-X Estratégico será liberado.</p>
+        <button class="btn btn-lg" style="width:100%;justify-content:center;margin-bottom:12px" onclick="irParaPagamento()">Ir para pagamento →</button>
+        <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="checkPayment()">Já efetuei o pagamento</button>
+        <div class="co-trust" style="margin-top:20px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> Pagamento processado pelo Asaas</div>
+        <p style="font-size:12px;color:var(--placeholder);text-align:center;margin-top:14px;line-height:1.6">🔒 O acesso ao diagnóstico é liberado apenas após confirmação do pagamento pelo Asaas. Nenhuma etapa é liberada sem essa confirmação.</p>
+        <p class="print-note" style="margin-top:14px"><a onclick="go('landing')" style="color:var(--sub);cursor:pointer">← Voltar ao início</a></p>
       </div>
     </div>
   </div>
@@ -1409,10 +1403,30 @@ return {versao:META.versao,diagnosticar:diagnosticar};
 </script>
 
 <script>
-/* ════════ ROUTER ════════
-   Páginas do MVP: landing → checkout → quiz → proc → report → pos → fundacao.
-   Fluxo único, sem CTAs concorrentes. */
-function go(v){document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));var el=document.getElementById('view-'+v);if(el)el.classList.add('active');window.scrollTo({top:0});}
+/* ════════ ESTADO DE PAGAMENTO (gate Asaas) ════════
+   A ÚNICA condição que libera o diagnóstico é paymentStatus === 'approved'.
+   Estados: pending · awaiting_pix · approved · refused · expired · canceled · refunded.
+   Em produção, o webhook/API do Asaas é a autoridade que define este valor
+   (via backend). O front-end NUNCA deve setar 'approved' por conta própria. */
+let paymentStatus = "pending";
+const LINK_ASAAS = "https://www.asaas.com/c/50y8pxnjs3y7lpcp";
+/* views que exigem pagamento aprovado para abrir */
+const VIEWS_PROTEGIDAS = ['quiz','proc','dash','report','pos','fundacao'];
+
+/* ════════ ROUTER COM GATE ════════
+   Chokepoint único: toda troca de view passa por aqui. Se a view é protegida
+   e o pagamento não está aprovado, redireciona para 'payment'. Isso cobre
+   URL, botão voltar, chamada manual de go() no console, qualquer caminho —
+   porque não existe outra forma de ativar uma view. */
+function go(v){
+  if(VIEWS_PROTEGIDAS.indexOf(v)!==-1 && paymentStatus!=='approved'){
+    v='payment';
+  }
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  var el=document.getElementById('view-'+v);
+  if(el)el.classList.add('active');
+  window.scrollTo({top:0});
+}
 
 /* VSL — espaço reservado para o vídeo final (roteiro entregue à parte) */
 function playVSL(){
@@ -1420,26 +1434,41 @@ function playVSL(){
   if(f)f.innerHTML='<div style="text-align:center;padding:20px;position:relative;z-index:2"><div class="vsl2-lbl" style="margin-bottom:8px">Espaço reservado para a VSL</div><p style="font-size:13px;color:rgba(255,255,255,.45);max-width:380px;line-height:1.6">Insira aqui o vídeo de vendas final (o roteiro já está pronto para gravar). Em produção, este bloco recebe o player do vídeo.</p></div>';
 }
 
-/* CHECKOUT — simulação visual + PONTO DE INTEGRAÇÃO REAL.
-   Ação da Yasmin: substituir confirmarPagamento() pela plataforma de pagamento
-   (credencial bancária + retorno pós-aprovação). O ponto está marcado abaixo. */
+/* ════════ PAGAMENTO ASAAS ════════
+   irParaPagamento(): abre o checkout Asaas em nova aba e leva o usuário
+   à tela de espera. checkPayment(): consulta o estado e só libera se aprovado. */
+function irParaPagamento(){
+  window.open(LINK_ASAAS,'_blank');
+  go('payment');
+}
+
+function checkPayment(){
+  /* ╔══════════════ PONTO DE INTEGRAÇÃO REAL (AÇÃO DA YASMIN) ══════════════╗
+     Em produção, aqui entra a consulta ao backend que lê o status do Asaas
+     (API + Webhook). O backend responde o status real da cobrança e só ele
+     pode setar paymentStatus='approved'. Enquanto o backend não existe,
+     esta função mantém o bloqueio: sem 'approved', não libera.
+     Exemplo de integração futura:
+       fetch('/api/asaas/status?cobranca=ID')
+         .then(r=>r.json())
+         .then(d=>{ paymentStatus=d.status; if(d.status==='approved'){go('quiz');renderQuiz();} else avisarPendente(); });
+     ╚═══════════════════════════════════════════════════════════════════════╝ */
+  if(paymentStatus==='approved'){
+    go('quiz');
+    renderQuiz();
+    return;
+  }
+  avisarPendente();
+}
+function avisarPendente(){
+  alert('Seu pagamento ainda não foi confirmado pelo Asaas. Assim que identificado, o acesso será liberado.');
+}
+/* compat: chamadas antigas apontam para o fluxo de pagamento */
+function confirmarPagamento(){ irParaPagamento(); }
+function iniciarQuestionario(){ if(paymentStatus==='approved'){go('quiz');renderQuiz();}else{go('payment');} }
+function startCheckout(){ irParaPagamento(); }
 function payOpt(el){document.querySelectorAll('.co-pay-opt').forEach(function(o){o.classList.remove('on')});el.classList.add('on');}
 
-function confirmarPagamento(){
-  // captura nome/email para personalizar (em produção, vêm da plataforma de pagamento)
-  var n=document.getElementById('co-nome');var e=document.getElementById('co-email');
-  if(n&&n.value)A.nome=n.value.trim();
-  /* ╔══════════════ PONTO DE INTEGRAÇÃO REAL (AÇÃO DA YASMIN) ══════════════╗
-     Em produção, aqui entra a chamada à plataforma de pagamento:
-       window.location.href = 'https://SEU_CHECKOUT/raio-x';
-     e o retorno (webhook/redirect pós-aprovação) chama: iniciarQuestionario();
-     Por enquanto, a simulação aprova e segue direto ao questionário.
-     ╚═══════════════════════════════════════════════════════════════════════╝ */
-  iniciarQuestionario();
-}
-function iniciarQuestionario(){go('quiz');renderQuiz();}
-/* compat: startCheckout antigo aponta para o checkout */
-function startCheckout(){go('checkout');}
 
 /* ════════ QUESTIONÁRIO ROBUSTO ════════
    Organizado em estágios. Coleta tudo que alimenta o Motor de Diagnóstico. */
