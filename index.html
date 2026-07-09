@@ -410,6 +410,39 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:rgba(
 .layer-btn.on{background:var(--azul);color:#fff;border-color:var(--azul)}
 .dash-divider{height:1px;background:var(--borda);margin:38px 0}
 @media print{.layer-nav,.layer-btn{display:none!important}.dash-page{break-inside:avoid}}
+/* ═══════ PRODUÇÃO: segurança · políticas · suporte · pagamento ═══════ */
+.seg-txt{font-size:12.5px;color:var(--sub);text-align:center;margin-top:12px;line-height:1.6}
+/* políticas */
+.pol-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:820px;margin:0 auto}
+@media(max-width:720px){.pol-grid{grid-template-columns:1fr}}
+.pol-card{background:var(--branco);border:1px solid var(--borda);border-radius:14px;padding:24px 26px}
+.pol-ic{width:42px;height:42px;border-radius:11px;background:var(--azul-bg);display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:12px}
+.pol-card h3{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--escuro);margin-bottom:8px;letter-spacing:-.01em}
+.pol-card p{font-size:13px;color:var(--sub);line-height:1.65}
+/* tela de pagamento */
+.pay-lock{width:64px;height:64px;border-radius:50%;background:var(--azul-bg);display:flex;align-items:center;justify-content:center;margin:4px auto 18px}
+.pay-h{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;color:var(--escuro);letter-spacing:-.02em;margin-bottom:10px;line-height:1.2}
+.pay-p{font-size:14.5px;color:var(--sub);line-height:1.7;max-width:400px;margin:0 auto 22px}
+.pay-alert{display:none;background:var(--amarelo-bg);border:1px solid rgba(180,83,9,.22);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--amarelo);line-height:1.6;margin-bottom:16px;text-align:left}
+.pay-alert b{color:#7c3a06}
+.pay-help{margin-top:18px;padding-top:18px;border-top:1px dashed var(--borda)}
+/* bloco de código de acesso */
+.cod-box{background:var(--azul-bg);border:1.5px solid rgba(0,85,204,.22);border-radius:14px;padding:20px 20px 18px;margin:14px 0 10px;text-align:left}
+.cod-step{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--azul);margin-bottom:8px}
+.cod-p{font-size:13px;color:var(--escuro);line-height:1.6;margin-bottom:14px}
+.cod-p b{color:var(--azul)}
+.cod-input{width:100%;padding:15px 16px;border:1.5px solid rgba(0,85,204,.3);border-radius:10px;background:#fff;color:var(--azul);font-family:'JetBrains Mono','Courier New',monospace;font-size:19px;font-weight:600;letter-spacing:.1em;text-align:center;text-transform:uppercase;transition:border-color .15s}
+.cod-input:focus{outline:none;border-color:var(--azul-m);box-shadow:0 0 0 3px rgba(0,102,255,.12)}
+.cod-input::placeholder{color:var(--placeholder);letter-spacing:.08em;font-weight:500}
+.cod-hint{font-size:11.5px;color:var(--sub);text-align:center;margin-top:10px;line-height:1.5}
+.pay-help p{font-size:12.5px;color:var(--sub);line-height:1.65;text-align:left}
+.pay-help b{color:var(--escuro)}
+/* botão fixo de suporte */
+.help-fab{position:fixed;right:18px;bottom:18px;z-index:999;display:inline-flex;align-items:center;gap:9px;background:#0A2540;color:#fff;border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:13px 20px;font-size:13.5px;font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(10,37,64,.28);transition:transform .15s,background .15s}
+.help-fab:hover{transform:translateY(-2px);background:#0d2f52}
+.help-fab svg{flex-shrink:0}
+@media print{.help-fab{display:none!important}}
+@media(max-width:520px){.help-fab{right:12px;bottom:12px;padding:12px 16px;font-size:12.5px}}
 </style>
 </head>
 <body>
@@ -436,9 +469,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:rgba(
     </div>
   </div>
 
-  <!-- VSL -->
+  <!-- VSL — vídeo gravado. Servir vsl_ym.mp4 na mesma pasta do HTML. -->
   <div class="vsl2">
-    <div class="vsl2-frame" onclick="playVSL()">
+    <div class="vsl2-frame" id="vsl-frame" onclick="playVSL()">
       <div class="vsl2-play"><svg width="22" height="26" viewBox="0 0 26 30" fill="none"><path d="M25 13.27a2 2 0 010 3.46L3 29.46A2 2 0 010 27.73V2.27A2 2 0 013 .54L25 13.27z" fill="#0055CC"/></svg></div>
       <div class="vsl2-lbl">Assista · 3 min</div>
     </div>
@@ -492,15 +525,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:rgba(
     <div class="lp-price">
       <div class="tag">Raio-X Estratégico</div>
       <div class="val"><small>R$</small>97</div>
-      <div class="cap">Pagamento único · cartão, Pix ou boleto · entregue na hora</div>
+      <div class="cap">Pagamento único · cartão, Pix ou parcelado · entregue na hora</div>
       <button class="btn btn-lg" style="width:100%;justify-content:center" onclick="irParaPagamento()">Fazer meu Raio-X agora →</button>
       <div class="co-trust"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> Pagamento seguro via Asaas</div>
-      <p style="font-size:12px;color:var(--sub);text-align:center;margin-top:10px;line-height:1.5">🔒 O acesso ao diagnóstico é liberado apenas após confirmação do pagamento pelo Asaas.</p>
+      <p class="seg-txt">🔒 Após a confirmação do pagamento, seu questionário será liberado para gerar o Raio-X Estratégico.</p>
+    </div>
+  </div>
+
+  <!-- GARANTIAS · POLÍTICAS · SUPORTE -->
+  <div class="lp-sec" style="padding-top:0">
+    <div class="pol-grid">
+      <div class="pol-card">
+        <div class="pol-ic">↩</div>
+        <h3>Política de arrependimento</h3>
+        <p>Você pode solicitar cancelamento em até 7 dias corridos após a compra, conforme o Código de Defesa do Consumidor. Para solicitar, entre em contato pelo WhatsApp oficial da YM informando nome, e-mail e comprovante da compra.</p>
+      </div>
+      <div class="pol-card">
+        <div class="pol-ic">🛟</div>
+        <h3>Se algo falhar</h3>
+        <p>Se o questionário não abrir, o relatório não carregar ou ocorrer qualquer falha técnica, envie seu comprovante para o WhatsApp da YM. Seu acesso será liberado manualmente ou o Raio-X será gerado e enviado em até 24h úteis.</p>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ════════ TELA DE PAGAMENTO / ESPERA (gate Asaas) ════════ -->
+<!-- ════════ PAGAMENTO EM CONFIRMAÇÃO (gate Asaas) ════════ -->
 <div class="view" id="view-payment">
   <div class="co-wrap">
     <div class="co-card">
@@ -510,16 +559,39 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:rgba(
         <div class="amt">R$ 97<small> · pagamento único</small></div>
       </div>
       <div class="co-body" style="text-align:center">
-        <div style="width:64px;height:64px;border-radius:50%;background:var(--azul-bg);display:flex;align-items:center;justify-content:center;margin:6px auto 20px">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><rect x="4" y="8" width="16" height="12" rx="2" stroke="#0066FF" stroke-width="2"/><path d="M8 8V6a4 4 0 018 0v2" stroke="#0066FF" stroke-width="2"/></svg>
+        <div class="pay-lock">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="#0055CC" stroke-width="1.9"/><path d="M8 10V6.8a4 4 0 018 0V10" stroke="#0055CC" stroke-width="1.9" stroke-linecap="round"/></svg>
         </div>
-        <h2 style="font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;color:var(--escuro);letter-spacing:-.02em;margin-bottom:12px">Aguardando confirmação do pagamento</h2>
-        <p style="font-size:14.5px;color:var(--sub);line-height:1.7;max-width:400px;margin:0 auto 26px">Assim que o Asaas confirmar o pagamento, o seu acesso ao Raio-X Estratégico será liberado.</p>
-        <button class="btn btn-lg" style="width:100%;justify-content:center;margin-bottom:12px" onclick="irParaPagamento()">Ir para pagamento →</button>
-        <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="checkPayment()">Já efetuei o pagamento</button>
-        <div class="co-trust" style="margin-top:20px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> Pagamento processado pelo Asaas</div>
-        <p style="font-size:12px;color:var(--placeholder);text-align:center;margin-top:14px;line-height:1.6">🔒 O acesso ao diagnóstico é liberado apenas após confirmação do pagamento pelo Asaas. Nenhuma etapa é liberada sem essa confirmação.</p>
-        <p class="print-note" style="margin-top:14px"><a onclick="go('landing')" style="color:var(--sub);cursor:pointer">← Voltar ao início</a></p>
+        <h2 class="pay-h">Pagamento em confirmação</h2>
+        <p class="pay-p">Assim que o Asaas confirmar o pagamento, o seu acesso ao Raio-X Estratégico será liberado.</p>
+
+        <div id="pay-alert" class="pay-alert"></div>
+
+        <button class="btn btn-lg" style="width:100%;justify-content:center;margin-bottom:10px" onclick="irParaPagamento()">Ir para pagamento →</button>
+
+        <!-- CÓDIGO DE ACESSO — liberação após confirmação do pagamento -->
+        <div class="cod-box">
+          <div class="cod-step">Já pagou?</div>
+          <p class="cod-p">Assim que confirmarmos o seu pagamento, enviamos um <b>código de acesso</b> pelo WhatsApp. Digite-o abaixo para liberar o seu Raio-X.</p>
+          <input id="cod-input" class="cod-input" type="text" inputmode="text" autocomplete="off"
+                 placeholder="YM-XXXX-XXXX" maxlength="16"
+                 oninput="formatarCodigo(this);limparAlerta()"
+                 onkeydown="if(event.key==='Enter'){validarCodigo()}">
+          <button class="btn btn-lg" id="btn-codigo" style="width:100%;justify-content:center;margin-top:10px" onclick="validarCodigo()">Liberar meu Raio-X</button>
+          <p class="cod-hint">Ainda não recebeu o código? Envie o comprovante no WhatsApp abaixo.</p>
+        </div>
+
+        <button class="btn btn-ghost" id="btn-check" style="width:100%;justify-content:center;margin-top:4px" onclick="checkPayment()">Verificar pagamento automaticamente</button>
+
+        <div class="co-trust" style="margin-top:18px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> Pagamento processado pelo Asaas</div>
+        <p class="seg-txt" style="text-align:center">🔒 Após a confirmação do pagamento, seu questionário será liberado para gerar o Raio-X Estratégico.</p>
+
+        <div class="pay-help">
+          <p><b>Não conseguiu acessar?</b> Se você já pagou e o questionário não abriu, envie o comprovante pelo WhatsApp. Liberamos o acesso manualmente ou geramos o seu Raio-X e enviamos em até 24h úteis.</p>
+          <a class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:10px" id="lnk-suporte-pay" target="_blank" rel="noopener">Enviar comprovante no WhatsApp</a>
+        </div>
+
+        <p class="print-note" style="margin-top:16px"><a onclick="go('landing')" style="color:var(--sub);cursor:pointer">← Voltar ao início</a></p>
       </div>
     </div>
   </div>
@@ -1403,21 +1475,200 @@ return {versao:META.versao,diagnosticar:diagnosticar};
 </script>
 
 <script>
-/* ════════ ESTADO DE PAGAMENTO (gate Asaas) ════════
+/* ╔═══════════════════════════════════════════════════════════════════════╗
+   ║  CONFIGURAÇÃO DE PRODUÇÃO — YM RAIO-X ESTRATÉGICO                     ║
+   ║                                                                       ║
+   ║  ⚠ NUNCA colocar chave de API (Asaas ou IA) neste arquivo.            ║
+   ║    Este HTML é público. Chaves vivem SOMENTE no backend (Vercel).     ║
+   ╚═══════════════════════════════════════════════════════════════════════╝ */
+const LINK_ASAAS   = "https://www.asaas.com/c/50y8pxnjs3y7lpcp";
+const WHATSAPP_YM  = "https://wa.me/5531975073862";
+
+/* ┌─────────────────────────────────────────────────────────────────────┐
+   │ ① ONDE ENTRA O ENDPOINT DA VERCEL                                   │
+   │                                                                     │
+   │ Substituir pela URL do seu projeto serverless quando publicado:     │
+   │   const API_BASE = "https://ym-api.vercel.app";                     │
+   │                                                                     │
+   │ Rotas esperadas no backend:                                         │
+   │   GET  /api/pagamento/status?ref=<referencia>   → { status: "..." } │
+   │   POST /api/asaas/webhook                       → recebe do Asaas   │
+   │   POST /api/relatorio                           → gera o texto (IA) │
+   │                                                                     │
+   │ Enquanto API_BASE for null, o front NÃO libera nada.                │
+   └─────────────────────────────────────────────────────────────────────┘ */
+const API_BASE = null;   // ← trocar pela URL da Vercel quando o backend existir
+
+/* ╔═══════════════════════════════════════════════════════════════════════╗
+   ║  LIBERAÇÃO MANUAL POR CÓDIGO DE ACESSO (ponte até o backend existir)  ║
+   ║                                                                       ║
+   ║  Como funciona:                                                       ║
+   ║   1. Cliente paga no Asaas e te manda o comprovante no WhatsApp.      ║
+   ║   2. Você confere o pagamento no painel do Asaas.                     ║
+   ║   3. Você envia UM código da sua lista para essa pessoa.              ║
+   ║   4. Ela digita o código na tela de pagamento e o questionário abre.  ║
+   ║                                                                       ║
+   ║  Segurança: os códigos NÃO estão neste arquivo — só o hash SHA-256    ║
+   ║  de cada um. Hash é via de mão única: não dá para voltar ao código.   ║
+   ║                                                                       ║
+   ║  Uso único: ao usar, o navegador da pessoa marca o código como usado. ║
+   ║  Isso impede reuso casual (não impede aba anônima — aceitável aqui,   ║
+   ║  já que você entrega um código por pessoa que pagou).                 ║
+   ║                                                                       ║
+   ║  Para gerar mais códigos: rode o script gerador e cole os novos       ║
+   ║  hashes na lista abaixo.                                              ║
+   ╚═══════════════════════════════════════════════════════════════════════╝ */
+const CODIGO_SALT = "YM-RAIOX-2026";
+
+/* hashes dos 20 códigos de cliente (uso único) */
+const CODIGOS_HASH = [
+  "9984d06e8fdce511cdf2aa73fac6ca60adc9d1314097e8f04d6ae78f30e0c451",
+  "083fc5db93c8ff8544acf0d38445bed1888c717747cfee1dccbf5a74f7bfeb24",
+  "c15fddb9ddc714726d89adf2d2bab9a9d34b686d4ebd7fae6fee188705768639",
+  "26a617af706c39275cd25456035f3cbca7cf80b697ac961be57f6f94e9c01797",
+  "b82d64293203cee0db6ce8fb6e700300538535d2da6e5c300a3d8cd01f86c584",
+  "3ac6f7bdc71eddca927bf86f242fe386e4d12e87f85ae601e28241c6e68f3f6f",
+  "79b9830788c1d6126129791e4ca499e800d7f1776c41aa3cc3062e12cca702e1",
+  "331a02b2e89113c3e91632fcd9eaa2c56c79bf8d209128bad1dc061d7df6c9f1",
+  "3825695c89f9e963a03387f69880862c32f506086bcbbcec6766b03bf8846ee9",
+  "135d56a020dce507c2fd72c126a4ac0fc1c25e67b4b9fbea3ff2eada92115a23",
+  "c7838da997e0b9172ef7e50a7762cf1424cfd2539df31767f73e4414c76a9c73",
+  "13f32ea5945bcc7a73b9d0d72e62c7249b35f7aca0e8b236c04312a63bb36264",
+  "eafd8d900016c5102c27cc40eea13dc5e6e91c6abc498943ae61436dd47dcd17",
+  "e2e91a29010bf14bfecd5ef70d99c624b74670dcd6bf70913d66d5dd12eecc39",
+  "fa24ab7bf226484ac83a391985ff98bc2d0f3dca9327195e1cdb56e41cd0cbe8",
+  "50ee485d9d587bf3ff9e02268325c3699136072b949b52b2b8984d659f432ffd",
+  "6feb2efd6566dca97c8068f47611c1d7620ae14e50338da8c84d163a0a257fc9",
+  "28fc388ecf2e4a4ec32b4e84c7611313f760ada7f0cbe81e5e748e80ef6e691a",
+  "28340143bca68883171b01f71a1673ddf843a06edb646bdc9af389fe5e7f21a0",
+  "73699940358398050681dc5b40c5b5decd2bf74bc683916dbc710b39c4d63ff9"
+];
+
+/* hash do código-mestre da Yasmin (reutilizável, para testes) */
+const CODIGO_MESTRE_HASH = "ec8c8d9cbb62802bdf8c77848aae894aa6b349f1905c58ceea0b43f44fd222e3";
+
+/* SHA-256 nativo do navegador */
+async function sha256(txt){
+  const buf = new TextEncoder().encode(txt);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+/* marca de uso — guardada no navegador do cliente */
+function codigoJaUsado(h){
+  try{ return (localStorage.getItem('ym_codigos_usados')||'').split(',').indexOf(h)!==-1; }
+  catch(e){ return false; }
+}
+function marcarCodigoUsado(h){
+  try{
+    var l=(localStorage.getItem('ym_codigos_usados')||'').split(',').filter(Boolean);
+    if(l.indexOf(h)===-1) l.push(h);
+    localStorage.setItem('ym_codigos_usados', l.join(','));
+  }catch(e){}
+}
+
+/* valida o código digitado e libera o questionário se for válido */
+async function validarCodigo(){
+  const inp = document.getElementById('cod-input');
+  const btn = document.getElementById('btn-codigo');
+  if(!inp) return;
+
+  const bruto = (inp.value||'').trim().toUpperCase();
+  if(bruto.length < 6){
+    mostrarAlerta('<b>Digite o código completo.</b><br>Ele tem o formato YM-XXXX-XXXX e foi enviado pelo WhatsApp após a confirmação do seu pagamento.');
+    return;
+  }
+
+  if(btn){ btn.disabled=true; btn.textContent='Verificando…'; }
+  try{
+    const h = await sha256(CODIGO_SALT + bruto);
+
+    /* código-mestre: reutilizável, não marca uso */
+    if(h === CODIGO_MESTRE_HASH){
+      paymentStatus = 'approved';
+      go('quiz'); renderQuiz();
+      return;
+    }
+
+    /* código de cliente: precisa existir e não ter sido usado neste navegador */
+    if(CODIGOS_HASH.indexOf(h) !== -1){
+      if(codigoJaUsado(h)){
+        mostrarAlerta('<b>Este código já foi utilizado.</b><br>Se você ainda não fez o seu Raio-X, fale com a YM pelo WhatsApp que liberamos um novo acesso.');
+        return;
+      }
+      marcarCodigoUsado(h);
+      paymentStatus = 'approved';
+      go('quiz'); renderQuiz();
+      return;
+    }
+
+    mostrarAlerta('<b>Código não reconhecido.</b><br>Confira se digitou corretamente (o formato é YM-XXXX-XXXX). Se o problema continuar, envie seu comprovante pelo WhatsApp.');
+  }catch(e){
+    mostrarAlerta('<b>Não foi possível validar agora.</b><br>Envie seu comprovante pelo WhatsApp e liberamos o acesso.');
+  }finally{
+    if(btn){ btn.disabled=false; btn.textContent='Liberar meu Raio-X'; }
+  }
+}
+
+function mostrarAlerta(html){
+  var box=document.getElementById('pay-alert');
+  if(box){ box.style.display='block'; box.innerHTML=html; }
+  else alert(html.replace(/<[^>]+>/g,' '));
+}
+function limparAlerta(){
+  var box=document.getElementById('pay-alert');
+  if(box){ box.style.display='none'; box.innerHTML=''; }
+}
+
+/* formata o código enquanto digita: YM-XXXX-XXXX
+   (o código-mestre YM-MASTER-XXXXXX é preservado como está) */
+function formatarCodigo(el){
+  var v = el.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
+  if(v.startsWith('YM')) v = v.slice(2);
+
+  /* código-mestre: mantém o formato próprio, sem truncar */
+  if(v.startsWith('MASTER')){
+    var resto = v.slice(6, 12);
+    el.value = 'YM-MASTER' + (resto ? '-' + resto : '');
+    return;
+  }
+
+  var out = 'YM';
+  if(v.length) out += '-' + v.slice(0,4);
+  if(v.length>4) out += '-' + v.slice(4,8);
+  el.value = out;
+}
+
+/* ════════ ESTADO DE PAGAMENTO ════════
    A ÚNICA condição que libera o diagnóstico é paymentStatus === 'approved'.
-   Estados: pending · awaiting_pix · approved · refused · expired · canceled · refunded.
-   Em produção, o webhook/API do Asaas é a autoridade que define este valor
-   (via backend). O front-end NUNCA deve setar 'approved' por conta própria. */
+   Estados: pending · awaiting_pix · approved · refused · expired · canceled · refunded
+
+   ┌───────────────────────────────────────────────────────────────────────┐
+   │ ② ONDE O WEBHOOK DO ASAAS CONFIRMA O PAGAMENTO                        │
+   │                                                                       │
+   │ O front NUNCA decide se o pagamento foi aprovado. Quem decide é o     │
+   │ Asaas → webhook → backend (Vercel) → banco/KV.                        │
+   │                                                                       │
+   │ Fluxo real:                                                           │
+   │   1. Cliente paga no link do Asaas.                                   │
+   │   2. Asaas dispara POST para /api/asaas/webhook (evento               │
+   │      PAYMENT_CONFIRMED ou PAYMENT_RECEIVED). O backend valida a       │
+   │      assinatura do webhook usando a chave guardada no servidor.       │
+   │   3. Backend grava a referência da cobrança como "approved".          │
+   │   4. Este front consulta GET /api/pagamento/status e só então libera. │
+   │                                                                       │
+   │ ⚠ A variável abaixo é apenas o espelho local da resposta do backend.  │
+   │   Ela nunca deve ser setada como 'approved' pelo front-end.           │
+   └───────────────────────────────────────────────────────────────────────┘ */
 let paymentStatus = "pending";
-const LINK_ASAAS = "https://www.asaas.com/c/50y8pxnjs3y7lpcp";
-/* views que exigem pagamento aprovado para abrir */
+
+/* views que exigem pagamento aprovado */
 const VIEWS_PROTEGIDAS = ['quiz','proc','dash','report','pos','fundacao'];
 
 /* ════════ ROUTER COM GATE ════════
-   Chokepoint único: toda troca de view passa por aqui. Se a view é protegida
-   e o pagamento não está aprovado, redireciona para 'payment'. Isso cobre
-   URL, botão voltar, chamada manual de go() no console, qualquer caminho —
-   porque não existe outra forma de ativar uma view. */
+   Chokepoint único: toda troca de view passa por aqui. View protegida sem
+   pagamento aprovado → redireciona para 'payment'. Cobre URL, botão voltar,
+   navegação manual — porque não existe outra forma de ativar uma view. */
 function go(v){
   if(VIEWS_PROTEGIDAS.indexOf(v)!==-1 && paymentStatus!=='approved'){
     v='payment';
@@ -1428,46 +1679,79 @@ function go(v){
   window.scrollTo({top:0});
 }
 
-/* VSL — espaço reservado para o vídeo final (roteiro entregue à parte) */
-function playVSL(){
-  var f=document.querySelector('.vsl2-frame');
-  if(f)f.innerHTML='<div style="text-align:center;padding:20px;position:relative;z-index:2"><div class="vsl2-lbl" style="margin-bottom:8px">Espaço reservado para a VSL</div><p style="font-size:13px;color:rgba(255,255,255,.45);max-width:380px;line-height:1.6">Insira aqui o vídeo de vendas final (o roteiro já está pronto para gravar). Em produção, este bloco recebe o player do vídeo.</p></div>';
-}
-
-/* ════════ PAGAMENTO ASAAS ════════
-   irParaPagamento(): abre o checkout Asaas em nova aba e leva o usuário
-   à tela de espera. checkPayment(): consulta o estado e só libera se aprovado. */
+/* ════════ PAGAMENTO ASAAS ════════ */
 function irParaPagamento(){
-  window.open(LINK_ASAAS,'_blank');
+  window.open(LINK_ASAAS,'_blank','noopener');
   go('payment');
 }
 
-function checkPayment(){
-  /* ╔══════════════ PONTO DE INTEGRAÇÃO REAL (AÇÃO DA YASMIN) ══════════════╗
-     Em produção, aqui entra a consulta ao backend que lê o status do Asaas
-     (API + Webhook). O backend responde o status real da cobrança e só ele
-     pode setar paymentStatus='approved'. Enquanto o backend não existe,
-     esta função mantém o bloqueio: sem 'approved', não libera.
-     Exemplo de integração futura:
-       fetch('/api/asaas/status?cobranca=ID')
-         .then(r=>r.json())
-         .then(d=>{ paymentStatus=d.status; if(d.status==='approved'){go('quiz');renderQuiz();} else avisarPendente(); });
-     ╚═══════════════════════════════════════════════════════════════════════╝ */
-  if(paymentStatus==='approved'){
-    go('quiz');
-    renderQuiz();
-    return;
+/* checkPayment() — consulta o backend. Sem backend, mantém bloqueado. */
+async function checkPayment(){
+  var btn=document.getElementById('btn-check');
+  if(btn){btn.disabled=true;btn.textContent='Verificando…';}
+
+  try{
+    if(!API_BASE){
+      /* Backend ainda não configurado: NÃO liberar. Orientar o uso do código. */
+      mostrarAlerta('<b>A confirmação automática ainda não está ativa.</b><br>Se você já pagou, use o <b>código de acesso</b> que enviamos pelo WhatsApp no campo acima. Se ainda não recebeu, mande o comprovante que liberamos na hora.');
+      return;
+    }
+    /* ┌───────────────────────────────────────────────────────────────────┐
+       │ Consulta de status ao backend (Vercel). O backend lê o registro   │
+       │ gravado pelo webhook do Asaas e devolve o status real.            │
+       │ Nenhuma chave trafega aqui — só a referência da cobrança.         │
+       └───────────────────────────────────────────────────────────────────┘ */
+    const ref = new URLSearchParams(location.search).get('ref') || '';
+    const r = await fetch(API_BASE + '/api/pagamento/status?ref=' + encodeURIComponent(ref));
+    if(!r.ok) throw new Error('status ' + r.status);
+    const d = await r.json();
+    paymentStatus = d.status || 'pending';
+
+    if(paymentStatus === 'approved'){
+      go('quiz');
+      renderQuiz();
+      return;
+    }
+    avisarPendente();
+  }catch(e){
+    avisarPendente(true);
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='Já efetuei o pagamento';}
   }
-  avisarPendente();
 }
-function avisarPendente(){
-  alert('Seu pagamento ainda não foi confirmado pelo Asaas. Assim que identificado, o acesso será liberado.');
+
+function avisarPendente(erro){
+  var box=document.getElementById('pay-alert');
+  if(box){
+    box.style.display='block';
+    box.innerHTML = erro
+      ? '<b>Não foi possível verificar agora.</b><br>Se você já pagou, envie o comprovante pelo WhatsApp e liberamos o acesso manualmente.'
+      : '<b>Pagamento ainda não confirmado pelo Asaas.</b><br>A confirmação pode levar alguns minutos (Pix costuma ser imediato; boleto pode levar mais). Assim que identificada, o acesso é liberado.';
+  }else{
+    alert('Seu pagamento ainda não foi confirmado pelo Asaas. Assim que identificado, o acesso será liberado.');
+  }
 }
-/* compat: chamadas antigas apontam para o fluxo de pagamento */
+
+/* compat: chamadas antigas apontam para o fluxo de pagamento real */
 function confirmarPagamento(){ irParaPagamento(); }
 function iniciarQuestionario(){ if(paymentStatus==='approved'){go('quiz');renderQuiz();}else{go('payment');} }
 function startCheckout(){ irParaPagamento(); }
 function payOpt(el){document.querySelectorAll('.co-pay-opt').forEach(function(o){o.classList.remove('on')});el.classList.add('on');}
+
+/* VSL — player do vídeo gravado (arquivo servido junto ao site) */
+function playVSL(){
+  var f=document.getElementById('vsl-frame');
+  if(!f) return;
+  f.innerHTML='<video id="vsl-video" controls autoplay playsinline preload="metadata" '+
+    'style="width:100%;height:100%;object-fit:cover;border-radius:16px;background:#000" '+
+    'poster="vsl_poster.jpg">'+
+    '<source src="vsl_ym.mp4" type="video/mp4">'+
+    'Seu navegador não suporta vídeo HTML5. '+
+    '<a href="vsl_ym.mp4" style="color:#5BA4FF">Baixe o vídeo</a>.'+
+    '</video>';
+  f.style.cursor='default';
+  f.onclick=null;
+}
 
 
 /* ════════ QUESTIONÁRIO ROBUSTO ════════
@@ -1624,29 +1908,44 @@ async function runAnalysis(){
   /* ── CAMADA 2: A IA APENAS REDIGE O DIAGNÓSTICO ── */
   const userMsg='O Motor de Diagnóstico da YM já analisou este negócio. Transforme o objeto de diagnóstico abaixo em um relatório executivo, seguindo o formato JSON pedido. NÃO rediagnostique — apenas escreva bem o que já foi decidido.\n\nDIAGNÓSTICO DO MOTOR:\n'+JSON.stringify(DIAG,null,2);
   try{
-    const resp=await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        model:"claude-sonnet-4-6",max_tokens:4000,
-        system:SYSTEM_PROMPT,
-        messages:[{role:"user",content:userMsg}]
-      })
+    /* ┌───────────────────────────────────────────────────────────────────┐
+       │ ③ ONDE A API DA IA GERA O RELATÓRIO                                │
+       │                                                                   │
+       │ ⚠ A chamada NUNCA sai direto do browser para a Anthropic —         │
+       │   isso exigiria a chave de API no HTML público.                   │
+       │                                                                   │
+       │ O front envia apenas o objeto do Motor para o backend (Vercel).   │
+       │ O backend guarda ANTHROPIC_API_KEY como variável de ambiente,     │
+       │ chama a Anthropic e devolve o relatório em JSON.                  │
+       │                                                                   │
+       │ Backend esperado:  POST {API_BASE}/api/relatorio                  │
+       │   body:  { diagnostico: <objeto do Motor> }                       │
+       │   resp:  { relatorio: <JSON do relatório> }                       │
+       │                                                                   │
+       │ Se API_BASE não existir, cai no redator local (fallback abaixo).  │
+       └───────────────────────────────────────────────────────────────────┘ */
+    if(!API_BASE) throw new Error('backend-nao-configurado');
+
+    const resp=await fetch(API_BASE+"/api/relatorio",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({ diagnostico: DIAG })
     });
+    if(!resp.ok) throw new Error('api '+resp.status);
     const data=await resp.json();
-    let txt=(data.content||[]).map(b=>b.type==='text'?b.text:'').join('').trim();
-    txt=txt.replace(/^```json\s*/i,'').replace(/^```\s*/,'').replace(/```$/,'').trim();
-    const rep=JSON.parse(txt);
+    const rep = data.relatorio || data;
     clearInterval(mt);
     renderReport(rep);
   }catch(err){
     clearInterval(mt);
-    /* FALLBACK: se a IA redatora falhar, o relatório ainda sai —
-       montado direto do diagnóstico do Motor. O produto nunca fica refém da IA. */
+    /* FALLBACK: se a IA redatora falhar (ou o backend ainda não existir),
+       o relatório ainda sai — montado direto do diagnóstico do Motor.
+       O produto nunca fica refém da IA. */
     try{ renderReport(redatorLocal(DIAG)); }
     catch(e2){
       const el=document.getElementById('procerr');
       el.style.display='block';
-      el.innerHTML='<b>Não foi possível gerar o relatório agora.</b><br>'+(err&&err.message?err.message:'Erro de conexão.')+'<br><br>Em produção, a redação roda numa função no servidor da YM. <button class="btn btn-ghost" style="margin-top:10px" onclick="runAnalysis()">Tentar de novo</button>';
+      el.innerHTML='<b>Não foi possível gerar o relatório agora.</b><br>Envie seu comprovante pelo WhatsApp da YM: o Raio-X será gerado e enviado em até 24h úteis.<br><br><a class="btn btn-ghost" style="margin-top:10px" href="'+WHATSAPP_YM+'?text='+encodeURIComponent('Olá! Paguei o Raio-X e o relatório não carregou. Segue o comprovante.')+'" target="_blank">Falar no WhatsApp</a> <button class="btn btn-ghost" style="margin-top:10px" onclick="runAnalysis()">Tentar de novo</button>';
     }
   }
 }
@@ -2007,6 +2306,25 @@ function renderReport(r){
   try{ if(DIAG) renderDashboard(DIAG); }catch(e){}
   go('pos');
 }
+
+/* ════════ SUPORTE — monta os links de WhatsApp a partir de WHATSAPP_YM ════════ */
+function initSuporte(){
+  var msgGeral = 'Olá! Preciso de ajuda com o Raio-X Estratégico.';
+  var msgComp  = 'Olá! Paguei o Raio-X Estratégico e preciso liberar meu acesso. Segue o comprovante.';
+
+  var fab = document.getElementById('help-fab');
+  if(fab) fab.href = WHATSAPP_YM + '?text=' + encodeURIComponent(msgGeral);
+
+  var pay = document.getElementById('lnk-suporte-pay');
+  if(pay) pay.href = WHATSAPP_YM + '?text=' + encodeURIComponent(msgComp);
+}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initSuporte);}else{initSuporte();}
 </script>
+
+<!-- ════════ BOTÃO FIXO DE SUPORTE ════════ -->
+<a class="help-fab" id="help-fab" target="_blank" rel="noopener" aria-label="Preciso de ajuda — falar no WhatsApp da YM">
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 00-7.7 13.7L3 21l4.4-1.2A9 9 0 1012 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 10.5c.4 1.4 1.6 2.7 3 3.2l1-.9c.2-.2.5-.2.7-.1l1.6.7c.3.1.4.4.3.7l-.4 1c-.1.3-.4.5-.7.5-3.4-.2-6.2-3-6.4-6.4 0-.3.2-.6.5-.7l1-.4c.3-.1.6 0 .7.3l.7 1.6c.1.2 0 .5-.1.7l-.9 1z" fill="currentColor"/></svg>
+  Preciso de ajuda
+</a>
 </body>
 </html>
